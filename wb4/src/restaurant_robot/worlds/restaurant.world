@@ -1,0 +1,177 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+<world name="restaurant">
+
+  <include><uri>model://sun</uri></include>
+  <include><uri>model://ground_plane</uri></include>
+
+  <physics type="ode">
+    <real_time_update_rate>1000</real_time_update_rate>
+    <max_step_size>0.001</max_step_size>
+  </physics>
+
+  <!-- FLOOR -->
+  <model name="floor"><static>true</static><pose>0 0 0 0 0 0</pose>
+    <link name="link">
+      <collision name="c"><geometry><box><size>16 12 0.05</size></box></geometry></collision>
+      <visual name="v"><geometry><box><size>16 12 0.05</size></box></geometry>
+        <material><ambient>0.9 0.8 0.6 1</ambient></material></visual>
+    </link>
+  </model>
+
+  <!-- WALLS -->
+  <model name="wall_N"><static>true</static><pose>0 6 1 0 0 0</pose>
+    <link name="link"><collision name="c"><geometry><box><size>16 0.2 2</size></box></geometry></collision>
+    <visual name="v"><geometry><box><size>16 0.2 2</size></box></geometry>
+      <material><ambient>0.8 0.8 0.8 1</ambient></material></visual></link></model>
+
+  <model name="wall_S"><static>true</static><pose>0 -6 1 0 0 0</pose>
+    <link name="link"><collision name="c"><geometry><box><size>16 0.2 2</size></box></geometry></collision>
+    <visual name="v"><geometry><box><size>16 0.2 2</size></box></geometry>
+      <material><ambient>0.8 0.8 0.8 1</ambient></material></visual></link></model>
+
+  <model name="wall_E"><static>true</static><pose>8 0 1 0 0 0</pose>
+    <link name="link"><collision name="c"><geometry><box><size>0.2 12 2</size></box></geometry></collision>
+    <visual name="v"><geometry><box><size>0.2 12 2</size></box></geometry>
+      <material><ambient>0.8 0.8 0.8 1</ambient></material></visual></link></model>
+
+  <model name="wall_W"><static>true</static><pose>-8 0 1 0 0 0</pose>
+    <link name="link"><collision name="c"><geometry><box><size>0.2 12 2</size></box></geometry></collision>
+    <visual name="v"><geometry><box><size>0.2 12 2</size></box></geometry>
+      <material><ambient>0.8 0.8 0.8 1</ambient></material></visual></link></model>
+
+  <!-- 6 DINING TABLES — 2 rows of 3 -->
+  <!-- Front row y=1.0 -->
+  <model name="table_1"><static>true</static><pose>-5.0 1.0 0.4 0 0 0</pose>
+    <link name="link">
+      <collision name="c"><geometry><box><size>1.4 0.8 0.8</size></box></geometry></collision>
+      <visual name="v"><geometry><box><size>1.4 0.8 0.8</size></box></geometry>
+        <material><ambient>0.45 0.25 0.10 1</ambient></material></visual>
+    </link>
+  </model>
+
+  <model name="table_2"><static>true</static><pose>0.0 1.0 0.4 0 0 0</pose>
+    <link name="link">
+      <collision name="c"><geometry><box><size>1.4 0.8 0.8</size></box></geometry></collision>
+      <visual name="v"><geometry><box><size>1.4 0.8 0.8</size></box></geometry>
+        <material><ambient>0.45 0.25 0.10 1</ambient></material></visual>
+    </link>
+  </model>
+
+  <model name="table_3"><static>true</static><pose>5.0 1.0 0.4 0 0 0</pose>
+    <link name="link">
+      <collision name="c"><geometry><box><size>1.4 0.8 0.8</size></box></geometry></collision>
+      <visual name="v"><geometry><box><size>1.4 0.8 0.8</size></box></geometry>
+        <material><ambient>0.45 0.25 0.10 1</ambient></material></visual>
+    </link>
+  </model>
+
+  <!-- Back row y=-3.0 -->
+  <model name="table_4"><static>true</static><pose>-5.0 -3.0 0.4 0 0 0</pose>
+    <link name="link">
+      <collision name="c"><geometry><box><size>1.4 0.8 0.8</size></box></geometry></collision>
+      <visual name="v"><geometry><box><size>1.4 0.8 0.8</size></box></geometry>
+        <material><ambient>0.45 0.25 0.10 1</ambient></material></visual>
+    </link>
+  </model>
+
+  <model name="table_5"><static>true</static><pose>0.0 -3.0 0.4 0 0 0</pose>
+    <link name="link">
+      <collision name="c"><geometry><box><size>1.4 0.8 0.8</size></box></geometry></collision>
+      <visual name="v"><geometry><box><size>1.4 0.8 0.8</size></box></geometry>
+        <material><ambient>0.45 0.25 0.10 1</ambient></material></visual>
+    </link>
+  </model>
+
+  <model name="table_6"><static>true</static><pose>5.0 -3.0 0.4 0 0 0</pose>
+    <link name="link">
+      <collision name="c"><geometry><box><size>1.4 0.8 0.8</size></box></geometry></collision>
+      <visual name="v"><geometry><box><size>1.4 0.8 0.8</size></box></geometry>
+        <material><ambient>0.45 0.25 0.10 1</ambient></material></visual>
+    </link>
+  </model>
+
+  <!-- CHAIRS — 2 per table (north and south side only, no east/west blocking aisles) -->
+  <!-- Table 1 chairs -->
+  <model name="ch1a"><static>true</static><pose>-5.0 1.65 0.25 0 0 0</pose>
+    <link name="link"><collision name="c"><geometry><box><size>0.45 0.45 0.5</size></box></geometry></collision>
+    <visual name="v"><geometry><box><size>0.45 0.45 0.5</size></box></geometry>
+      <material><ambient>0.6 0.4 0.2 1</ambient></material></visual></link></model>
+  <model name="ch1b"><static>true</static><pose>-5.0 0.35 0.25 0 0 0</pose>
+    <link name="link"><collision name="c"><geometry><box><size>0.45 0.45 0.5</size></box></geometry></collision>
+    <visual name="v"><geometry><box><size>0.45 0.45 0.5</size></box></geometry>
+      <material><ambient>0.6 0.4 0.2 1</ambient></material></visual></link></model>
+
+  <!-- Table 2 chairs -->
+  <model name="ch2a"><static>true</static><pose>0.0 1.65 0.25 0 0 0</pose>
+    <link name="link"><collision name="c"><geometry><box><size>0.45 0.45 0.5</size></box></geometry></collision>
+    <visual name="v"><geometry><box><size>0.45 0.45 0.5</size></box></geometry>
+      <material><ambient>0.6 0.4 0.2 1</ambient></material></visual></link></model>
+  <model name="ch2b"><static>true</static><pose>0.0 0.35 0.25 0 0 0</pose>
+    <link name="link"><collision name="c"><geometry><box><size>0.45 0.45 0.5</size></box></geometry></collision>
+    <visual name="v"><geometry><box><size>0.45 0.45 0.5</size></box></geometry>
+      <material><ambient>0.6 0.4 0.2 1</ambient></material></visual></link></model>
+
+  <!-- Table 3 chairs -->
+  <model name="ch3a"><static>true</static><pose>5.0 1.65 0.25 0 0 0</pose>
+    <link name="link"><collision name="c"><geometry><box><size>0.45 0.45 0.5</size></box></geometry></collision>
+    <visual name="v"><geometry><box><size>0.45 0.45 0.5</size></box></geometry>
+      <material><ambient>0.6 0.4 0.2 1</ambient></material></visual></link></model>
+  <model name="ch3b"><static>true</static><pose>5.0 0.35 0.25 0 0 0</pose>
+    <link name="link"><collision name="c"><geometry><box><size>0.45 0.45 0.5</size></box></geometry></collision>
+    <visual name="v"><geometry><box><size>0.45 0.45 0.5</size></box></geometry>
+      <material><ambient>0.6 0.4 0.2 1</ambient></material></visual></link></model>
+
+  <!-- Table 4 chairs -->
+  <model name="ch4a"><static>true</static><pose>-5.0 -2.35 0.25 0 0 0</pose>
+    <link name="link"><collision name="c"><geometry><box><size>0.45 0.45 0.5</size></box></geometry></collision>
+    <visual name="v"><geometry><box><size>0.45 0.45 0.5</size></box></geometry>
+      <material><ambient>0.6 0.4 0.2 1</ambient></material></visual></link></model>
+  <model name="ch4b"><static>true</static><pose>-5.0 -3.65 0.25 0 0 0</pose>
+    <link name="link"><collision name="c"><geometry><box><size>0.45 0.45 0.5</size></box></geometry></collision>
+    <visual name="v"><geometry><box><size>0.45 0.45 0.5</size></box></geometry>
+      <material><ambient>0.6 0.4 0.2 1</ambient></material></visual></link></model>
+
+  <!-- Table 5 chairs -->
+  <model name="ch5a"><static>true</static><pose>0.0 -2.35 0.25 0 0 0</pose>
+    <link name="link"><collision name="c"><geometry><box><size>0.45 0.45 0.5</size></box></geometry></collision>
+    <visual name="v"><geometry><box><size>0.45 0.45 0.5</size></box></geometry>
+      <material><ambient>0.6 0.4 0.2 1</ambient></material></visual></link></model>
+  <model name="ch5b"><static>true</static><pose>0.0 -3.65 0.25 0 0 0</pose>
+    <link name="link"><collision name="c"><geometry><box><size>0.45 0.45 0.5</size></box></geometry></collision>
+    <visual name="v"><geometry><box><size>0.45 0.45 0.5</size></box></geometry>
+      <material><ambient>0.6 0.4 0.2 1</ambient></material></visual></link></model>
+
+  <!-- Table 6 chairs -->
+  <model name="ch6a"><static>true</static><pose>5.0 -2.35 0.25 0 0 0</pose>
+    <link name="link"><collision name="c"><geometry><box><size>0.45 0.45 0.5</size></box></geometry></collision>
+    <visual name="v"><geometry><box><size>0.45 0.45 0.5</size></box></geometry>
+      <material><ambient>0.6 0.4 0.2 1</ambient></material></visual></link></model>
+  <model name="ch6b"><static>true</static><pose>5.0 -3.65 0.25 0 0 0</pose>
+    <link name="link"><collision name="c"><geometry><box><size>0.45 0.45 0.5</size></box></geometry></collision>
+    <visual name="v"><geometry><box><size>0.45 0.45 0.5</size></box></geometry>
+      <material><ambient>0.6 0.4 0.2 1</ambient></material></visual></link></model>
+
+  <!-- 4 CORNER PILLARS -->
+  <model name="p_NW"><static>true</static><pose>-7 5 1 0 0 0</pose>
+    <link name="link"><collision name="c"><geometry><cylinder><radius>0.3</radius><length>2</length></cylinder></geometry></collision>
+    <visual name="v"><geometry><cylinder><radius>0.3</radius><length>2</length></cylinder></geometry>
+      <material><ambient>0.8 0.8 0.8 1</ambient></material></visual></link></model>
+
+  <model name="p_NE"><static>true</static><pose>7 5 1 0 0 0</pose>
+    <link name="link"><collision name="c"><geometry><cylinder><radius>0.3</radius><length>2</length></cylinder></geometry></collision>
+    <visual name="v"><geometry><cylinder><radius>0.3</radius><length>2</length></cylinder></geometry>
+      <material><ambient>0.8 0.8 0.8 1</ambient></material></visual></link></model>
+
+  <model name="p_SW"><static>true</static><pose>-7 -5 1 0 0 0</pose>
+    <link name="link"><collision name="c"><geometry><cylinder><radius>0.3</radius><length>2</length></cylinder></geometry></collision>
+    <visual name="v"><geometry><cylinder><radius>0.3</radius><length>2</length></cylinder></geometry>
+      <material><ambient>0.8 0.8 0.8 1</ambient></material></visual></link></model>
+
+  <model name="p_SE"><static>true</static><pose>7 -5 1 0 0 0</pose>
+    <link name="link"><collision name="c"><geometry><cylinder><radius>0.3</radius><length>2</length></cylinder></geometry></collision>
+    <visual name="v"><geometry><cylinder><radius>0.3</radius><length>2</length></cylinder></geometry>
+      <material><ambient>0.8 0.8 0.8 1</ambient></material></visual></link></model>
+
+</world>
+</sdf>

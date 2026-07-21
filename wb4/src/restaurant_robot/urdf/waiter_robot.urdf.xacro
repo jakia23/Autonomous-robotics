@@ -1,0 +1,189 @@
+<?xml version="1.0"?>
+<robot name="waiter_robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <material name="black">  <color rgba="0.1  0.1  0.1  1.0"/></material>
+  <material name="white">  <color rgba="0.95 0.95 0.95 1.0"/></material>
+  <material name="gold">   <color rgba="0.85 0.70 0.20 1.0"/></material>
+  <material name="silver"> <color rgba="0.75 0.75 0.80 1.0"/></material>
+  <material name="blue">   <color rgba="0.05 0.45 0.85 1.0"/></material>
+  <material name="cream">  <color rgba="0.90 0.85 0.70 1.0"/></material>
+  <material name="red">    <color rgba="0.8  0.1  0.1  1.0"/></material>
+
+  <link name="base_footprint"/>
+  <joint name="base_joint" type="fixed">
+    <parent link="base_footprint"/><child link="base_link"/>
+    <origin xyz="0 0 0.06" rpy="0 0 0"/>
+  </joint>
+
+  <link name="base_link">
+    <visual><geometry><cylinder length="0.12" radius="0.22"/></geometry><material name="black"/></visual>
+    <collision><geometry><cylinder length="0.12" radius="0.22"/></geometry></collision>
+    <inertial><mass value="8.0"/>
+      <inertia ixx="0.12" ixy="0" ixz="0" iyy="0.12" iyz="0" izz="0.20"/></inertial>
+  </link>
+
+  <link name="body_link">
+    <visual><geometry><cylinder length="0.70" radius="0.14"/></geometry><material name="white"/></visual>
+    <collision><geometry><cylinder length="0.70" radius="0.14"/></geometry></collision>
+    <inertial><mass value="5.0"/>
+      <inertia ixx="0.22" ixy="0" ixz="0" iyy="0.22" iyz="0" izz="0.05"/></inertial>
+  </link>
+  <joint name="body_joint" type="fixed">
+    <parent link="base_link"/><child link="body_link"/>
+    <origin xyz="0 0 0.41" rpy="0 0 0"/>
+  </joint>
+
+  <link name="screen_link">
+    <visual><geometry><box size="0.02 0.18 0.22"/></geometry><material name="blue"/></visual>
+    <inertial><mass value="0.3"/>
+      <inertia ixx="1e-3" ixy="0" ixz="0" iyy="1e-3" iyz="0" izz="1e-3"/></inertial>
+  </link>
+  <joint name="screen_joint" type="fixed">
+    <parent link="body_link"/><child link="screen_link"/>
+    <origin xyz="0.141 0 0.10" rpy="0 0 0"/>
+  </joint>
+
+  <link name="head_link">
+    <visual><geometry><sphere radius="0.14"/></geometry><material name="white"/></visual>
+    <collision><geometry><sphere radius="0.14"/></geometry></collision>
+    <inertial><mass value="1.0"/>
+      <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01"/></inertial>
+  </link>
+  <joint name="head_joint" type="fixed">
+    <parent link="body_link"/><child link="head_link"/>
+    <origin xyz="0 0 0.42" rpy="0 0 0"/>
+  </joint>
+
+  <link name="tray_pole_link">
+    <visual><geometry><cylinder length="0.35" radius="0.015"/></geometry><material name="silver"/></visual>
+    <inertial><mass value="0.2"/>
+      <inertia ixx="2e-3" ixy="0" ixz="0" iyy="2e-3" iyz="0" izz="1e-4"/></inertial>
+  </link>
+  <joint name="tray_pole_joint" type="fixed">
+    <parent link="body_link"/><child link="tray_pole_link"/>
+    <origin xyz="0 0 0.55" rpy="0 0 0"/>
+  </joint>
+
+  <link name="tray_link">
+    <visual><geometry><cylinder length="0.025" radius="0.28"/></geometry><material name="cream"/></visual>
+    <collision><geometry><cylinder length="0.025" radius="0.28"/></geometry></collision>
+    <inertial><mass value="0.8"/>
+      <inertia ixx="0.016" ixy="0" ixz="0" iyy="0.016" iyz="0" izz="0.031"/></inertial>
+  </link>
+  <joint name="tray_joint" type="fixed">
+    <parent link="tray_pole_link"/><child link="tray_link"/>
+    <origin xyz="0 0 0.19" rpy="0 0 0"/>
+  </joint>
+
+  <link name="tray_rim_link">
+    <visual><geometry><cylinder length="0.03" radius="0.285"/></geometry><material name="gold"/></visual>
+    <inertial><mass value="0.2"/>
+      <inertia ixx="5e-3" ixy="0" ixz="0" iyy="5e-3" iyz="0" izz="9e-3"/></inertial>
+  </link>
+  <joint name="tray_rim_joint" type="fixed">
+    <parent link="tray_link"/><child link="tray_rim_link"/>
+    <origin xyz="0 0 0.005" rpy="0 0 0"/>
+  </joint>
+
+  <link name="left_wheel_link">
+    <visual><geometry><cylinder length="0.04" radius="0.06"/></geometry><material name="black"/></visual>
+    <collision><geometry><cylinder length="0.04" radius="0.06"/></geometry></collision>
+    <inertial><mass value="0.5"/>
+      <inertia ixx="4.5e-4" ixy="0" ixz="0" iyy="4.5e-4" iyz="0" izz="9e-4"/></inertial>
+  </link>
+  <joint name="left_wheel_joint" type="continuous">
+    <parent link="base_link"/><child link="left_wheel_link"/>
+    <origin xyz="0.0 0.19 -0.03" rpy="-1.5707963 0 0"/>
+    <axis xyz="0 0 1"/>
+  </joint>
+
+  <link name="right_wheel_link">
+    <visual><geometry><cylinder length="0.04" radius="0.06"/></geometry><material name="black"/></visual>
+    <collision><geometry><cylinder length="0.04" radius="0.06"/></geometry></collision>
+    <inertial><mass value="0.5"/>
+      <inertia ixx="4.5e-4" ixy="0" ixz="0" iyy="4.5e-4" iyz="0" izz="9e-4"/></inertial>
+  </link>
+  <joint name="right_wheel_joint" type="continuous">
+    <parent link="base_link"/><child link="right_wheel_link"/>
+    <origin xyz="0.0 -0.19 -0.03" rpy="1.5707963 0 0"/>
+    <axis xyz="0 0 1"/>
+  </joint>
+
+  <link name="caster_front_link">
+    <visual><geometry><sphere radius="0.03"/></geometry><material name="silver"/></visual>
+    <collision><geometry><sphere radius="0.03"/></geometry></collision>
+    <inertial><mass value="0.05"/>
+      <inertia ixx="1e-5" ixy="0" ixz="0" iyy="1e-5" iyz="0" izz="1e-5"/></inertial>
+  </link>
+  <joint name="caster_front_joint" type="fixed">
+    <parent link="base_link"/><child link="caster_front_link"/>
+    <origin xyz="0.15 0 -0.03" rpy="0 0 0"/>
+  </joint>
+
+  <link name="caster_rear_link">
+    <visual><geometry><sphere radius="0.03"/></geometry><material name="silver"/></visual>
+    <collision><geometry><sphere radius="0.03"/></geometry></collision>
+    <inertial><mass value="0.05"/>
+      <inertia ixx="1e-5" ixy="0" ixz="0" iyy="1e-5" iyz="0" izz="1e-5"/></inertial>
+  </link>
+  <joint name="caster_rear_joint" type="fixed">
+    <parent link="base_link"/><child link="caster_rear_link"/>
+    <origin xyz="-0.15 0 -0.03" rpy="0 0 0"/>
+  </joint>
+
+  <link name="lidar_link">
+    <visual><geometry><cylinder length="0.04" radius="0.04"/></geometry><material name="red"/></visual>
+    <collision><geometry><cylinder length="0.04" radius="0.04"/></geometry></collision>
+    <inertial><mass value="0.1"/>
+      <inertia ixx="1e-4" ixy="0" ixz="0" iyy="1e-4" iyz="0" izz="1e-4"/></inertial>
+  </link>
+  <joint name="lidar_joint" type="fixed">
+    <parent link="base_link"/><child link="lidar_link"/>
+    <origin xyz="0 0 0.18" rpy="0 0 0"/>
+  </joint>
+
+  <gazebo>
+    <plugin name="gazebo_ros_diff_drive" filename="libgazebo_ros_diff_drive.so">
+      <update_rate>30</update_rate>
+      <left_joint>left_wheel_joint</left_joint>
+      <right_joint>right_wheel_joint</right_joint>
+      <wheel_separation>0.38</wheel_separation>
+      <wheel_diameter>0.12</wheel_diameter>
+      <max_wheel_torque>20</max_wheel_torque>
+      <max_wheel_acceleration>1.0</max_wheel_acceleration>
+      <command_topic>cmd_vel</command_topic>
+      <odometry_topic>odom</odometry_topic>
+      <odometry_frame>odom</odometry_frame>
+      <robot_base_frame>base_footprint</robot_base_frame>
+      <publish_odom>true</publish_odom>
+      <publish_odom_tf>true</publish_odom_tf>
+      <publish_wheel_tf>false</publish_wheel_tf>
+      <ros><remapping>cmd_vel:=cmd_vel</remapping></ros>
+    </plugin>
+  </gazebo>
+
+  <gazebo reference="lidar_link">
+    <sensor name="lidar" type="ray">
+      <always_on>true</always_on>
+      <visualize>true</visualize>
+      <update_rate>10</update_rate>
+      <ray>
+        <scan><horizontal>
+          <samples>360</samples><resolution>1</resolution>
+          <min_angle>-3.14159</min_angle><max_angle>3.14159</max_angle>
+        </horizontal></scan>
+        <range><min>0.15</min><max>8.0</max><resolution>0.01</resolution></range>
+        <noise><type>gaussian</type><mean>0.0</mean><stddev>0.01</stddev></noise>
+      </ray>
+      <plugin name="gazebo_ros_laser" filename="libgazebo_ros_ray_sensor.so">
+        <ros><remapping>~/out:=scan</remapping></ros>
+        <output_type>sensor_msgs/LaserScan</output_type>
+        <frame_name>lidar_link</frame_name>
+      </plugin>
+    </sensor>
+  </gazebo>
+
+  <gazebo reference="caster_front_link"><mu1>0.0</mu1><mu2>0.0</mu2></gazebo>
+  <gazebo reference="caster_rear_link"> <mu1>0.0</mu1><mu2>0.0</mu2></gazebo>
+
+</robot>
